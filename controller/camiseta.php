@@ -1,8 +1,8 @@
 <?php 
 
-require_once 'model/note.php';
+require_once 'model/camiseta.php';
 
-class noteController{
+class camisetaController{
 	public $page_title;
 	public $view;
 

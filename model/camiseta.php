@@ -14,7 +14,7 @@ class Camiseta {
 		$this->conection = $dbObj->conection;
 	}
 
-	/* Get all notes */
+	/* Get all camisetes */
 	public function getCamisetes(){
 		$this->getConection();
 		$sql = "SELECT * FROM ".$this->table;
@@ -24,7 +24,7 @@ class Camiseta {
 		return $stmt->fetchAll();
 	}
 
-	/* Get note by id */
+	/* Get camisetea by id */
 	public function getCamisetaById($id){
 		if(is_null($id)) return false;
 		$this->getConection();
@@ -35,12 +35,14 @@ class Camiseta {
 		return $stmt->fetch();
 	}
 
-	/* Save note */
+	/* Save camiseta */
 	public function save($param){
 		$this->getConection();
 
 		/* Set default values */
 		$nom = $descripcio = "";
+		$id = 0;
+		$preu = 0;
 
 		/* Check if exists */
 		$exists = false;
@@ -52,22 +54,25 @@ class Camiseta {
 				$id = $param["id"];
 				$nom = $actualCamiseta["nom"];
 				$descripcio = $actualCamiseta["descripcio"];
+				$preu = $actualCamiseta["preu"];
 			}
 		}
 
 		/* Received values */
+		if(isset($param["id"])) $id = $param["id"];
 		if(isset($param["nom"])) $nom = $param["nom"];
 		if(isset($param["descripcio"])) $descripcio = $param["descripcio"];
+		if(isset($param["preu"])) $preu = $param["preu"];
 
 		/* Database operations */
 		if($exists){
-			$sql = "UPDATE ".$this->table. " SET nom=?, descripcio=? WHERE id=?";
+			$sql = "UPDATE ".$this->table. " SET id=?, nom=?, descripcio=?, preu=? WHERE id=?";
 			$stmt = $this->conection->prepare($sql);
-			$res = $stmt->execute([$nom, $descripcio, $id]);
+			$res = $stmt->execute([$id, $nom, $descripcio, $preu]);
 		}else{
-			$sql = "INSERT INTO ".$this->table. " (nom, descripcio) values(?, ?)";
+			$sql = "INSERT INTO ".$this->table. " (id, nom, descripcio, preu) values(?, ?, ?, ?)";
 			$stmt = $this->conection->prepare($sql);
-			$stmt->execute([$nom, $descripcio]);
+			$stmt->execute([$id, $nom, $descripcio, $preu]);
 			$id = $this->conection->lastInsertId();
 		}	
 
@@ -75,7 +80,7 @@ class Camiseta {
 
 	}
 
-	/* Delete note by id */
+	/* Delete camiseta by id */
 	public function deleteCamisetaById($id){
 		$this->getConection();
 		$sql = "DELETE FROM ".$this->table. " WHERE id = ?";
