@@ -1,5 +1,4 @@
 <?php 
-
 class Note {
 
 	private $table = 'note';
