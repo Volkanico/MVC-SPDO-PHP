@@ -5,7 +5,6 @@ class Camiseta {
 	private $conection;
 
 	public function __construct() {
-		
 	}
 
 	/* Set conection */
@@ -75,9 +74,7 @@ class Camiseta {
 			$stmt->execute([$id, $nom, $descripcio, $preu]);
 			$id = $this->conection->lastInsertId();
 		}	
-
 		return $id;	
-
 	}
 
 	/* Delete camiseta by id */
@@ -87,7 +84,5 @@ class Camiseta {
 		$stmt = $this->conection->prepare($sql);
 		return $stmt->execute([$id]);
 	}
-
 }
-
 ?>

@@ -1,5 +1,4 @@
 <?php 
-
 require_once 'config/config.php';
 
 class Db {
@@ -23,9 +22,6 @@ class Db {
             echo $e->getMessage();
             exit();
         }
-
 	}
-
 }
-
 ?>

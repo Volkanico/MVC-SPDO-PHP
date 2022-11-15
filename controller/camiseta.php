@@ -1,5 +1,4 @@
 <?php 
-
 require_once 'model/camiseta.php';
 
 class camisetaController{
@@ -50,6 +49,5 @@ class camisetaController{
 		$this->view = 'delete_camiseta';
 		return $this->camisetaObj->deleteCamisetaById($_POST["id"]);
 	}
-
 }
 ?>
