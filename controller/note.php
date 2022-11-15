@@ -7,50 +7,49 @@ class noteController{
 	public $view;
 
 	public function __construct() {
-		$this->view = 'list_note';
+		$this->view = 'list_camiseta';
 		$this->page_title = '';
-		$this->noteObj = new Note();
+		$this->camisetaObj = new Camiseta();
 	}
 
-	/* List all notes */
+	/* List all camisetes */
 	public function list(){
-		$this->page_title = 'Listado de notas';
-		return $this->noteObj->getNotes();
+		$this->page_title = 'Listado de camisetes';
+		return $this->camisetaObj->getCamisetes();
 	}
 
-	/* Load note for edit */
+	/* Load camiseta for edit */
 	public function edit($id = null){
-		$this->page_title = 'Editar nota';
-		$this->view = 'edit_note';
+		$this->page_title = 'Editar camiseta';
+		$this->view = 'edit_camiseta';
 		/* Id can from get param or method param */
 		if(isset($_GET["id"])) $id = $_GET["id"];
-		return $this->noteObj->getNoteById($id);
+		return $this->camisetaObj->getCamisetaById($id);
 	}
 
-	/* Create or update note */
+	/* Create or update camiseta */
 	public function save(){
-		$this->view = 'edit_note';
-		$this->page_title = 'Editar nota';
-		$id = $this->noteObj->save($_POST);
-		$result = $this->noteObj->getNoteById($id);
+		$this->view = 'edit_camiseta';
+		$this->page_title = 'Editar camiseta';
+		$id = $this->camisetaObj->save($_POST);
+		$result = $this->camisetaObj->getCamisetaById($id);
 		$_GET["response"] = true;
 		return $result;
 	}
 
 	/* Confirm to delete */
 	public function confirmDelete(){
-		$this->page_title = 'Eliminar nota';
-		$this->view = 'confirm_delete_note';
-		return $this->noteObj->getNoteById($_GET["id"]);
+		$this->page_title = 'Eliminar camiseta';
+		$this->view = 'confirm_delete_camiseta';
+		return $this->camisetaObj->getCamisetaById($_GET["id"]);
 	}
 
 	/* Delete */
 	public function delete(){
-		$this->page_title = 'Listado de notas';
-		$this->view = 'delete_note';
-		return $this->noteObj->deleteNoteById($_POST["id"]);
+		$this->page_title = 'Listado de camiseta';
+		$this->view = 'delete_camiseta';
+		return $this->camisetaObj->deleteCamisetaById($_POST["id"]);
 	}
 
 }
-
 ?>

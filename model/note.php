@@ -1,7 +1,7 @@
 <?php 
-class Note {
+class Camiseta {
 
-	private $table = 'note';
+	private $table = 'camisetes';
 	private $conection;
 
 	public function __construct() {
@@ -15,7 +15,7 @@ class Note {
 	}
 
 	/* Get all notes */
-	public function getNotes(){
+	public function getCamisetes(){
 		$this->getConection();
 		$sql = "SELECT * FROM ".$this->table;
 		$stmt = $this->conection->prepare($sql);
@@ -25,7 +25,7 @@ class Note {
 	}
 
 	/* Get note by id */
-	public function getNoteById($id){
+	public function getCamisetaById($id){
 		if(is_null($id)) return false;
 		$this->getConection();
 		$sql = "SELECT * FROM ".$this->table. " WHERE id = ?";
@@ -40,34 +40,34 @@ class Note {
 		$this->getConection();
 
 		/* Set default values */
-		$title = $content = "";
+		$nom = $descripcio = "";
 
 		/* Check if exists */
 		$exists = false;
 		if(isset($param["id"]) and $param["id"] !=''){
-			$actualNote = $this->getNoteById($param["id"]);
-			if(isset($actualNote["id"])){
+			$actualCamiseta = $this->getCamisetaById($param["id"]);
+			if(isset($actualCamiseta["id"])){
 				$exists = true;	
 				/* Actual values */
 				$id = $param["id"];
-				$title = $actualNote["title"];
-				$content = $actualNote["content"];
+				$nom = $actualCamiseta["nom"];
+				$descripcio = $actualCamiseta["descripcio"];
 			}
 		}
 
 		/* Received values */
-		if(isset($param["title"])) $title = $param["title"];
-		if(isset($param["content"])) $content = $param["content"];
+		if(isset($param["nom"])) $nom = $param["nom"];
+		if(isset($param["descripcio"])) $descripcio = $param["descripcio"];
 
 		/* Database operations */
 		if($exists){
-			$sql = "UPDATE ".$this->table. " SET title=?, content=? WHERE id=?";
+			$sql = "UPDATE ".$this->table. " SET nom=?, descripcio=? WHERE id=?";
 			$stmt = $this->conection->prepare($sql);
-			$res = $stmt->execute([$title, $content, $id]);
+			$res = $stmt->execute([$nom, $descripcio, $id]);
 		}else{
-			$sql = "INSERT INTO ".$this->table. " (title, content) values(?, ?)";
+			$sql = "INSERT INTO ".$this->table. " (nom, descripcio) values(?, ?)";
 			$stmt = $this->conection->prepare($sql);
-			$stmt->execute([$title, $content]);
+			$stmt->execute([$nom, $descripcio]);
 			$id = $this->conection->lastInsertId();
 		}	
 
@@ -76,7 +76,7 @@ class Note {
 	}
 
 	/* Delete note by id */
-	public function deleteNoteById($id){
+	public function deleteCamisetaById($id){
 		$this->getConection();
 		$sql = "DELETE FROM ".$this->table. " WHERE id = ?";
 		$stmt = $this->conection->prepare($sql);
