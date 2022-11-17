@@ -1,5 +1,5 @@
 <div class="row">
 	<div class="alert alert-success">
-		Nota eliminada correctamente. <a href="index.php?controller=note&action=list">Volver al listado</a>
+		Camiseta eliminada correctament. <a href="index.php?controller=camiseta&action=list">Tornar a la llista</a>
 	</div>
 </div>

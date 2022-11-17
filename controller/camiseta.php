@@ -13,7 +13,7 @@ class camisetaController{
 
 	/* List all camisetes */
 	public function list(){
-		$this->page_title = 'Listado de camisetes';
+		$this->page_title = 'Llistat de camisetes';
 		return $this->camisetaObj->getCamisetes();
 	}
 
@@ -29,7 +29,7 @@ class camisetaController{
 	/* Create or update camiseta */
 	public function save(){
 		$this->view = 'edit_camiseta';
-		$this->page_title = 'Editar camiseta';
+		$this->page_title = 'Guardar camiseta';
 		$id = $this->camisetaObj->save($_POST);
 		$result = $this->camisetaObj->getCamisetaById($id);
 		$_GET["response"] = true;
