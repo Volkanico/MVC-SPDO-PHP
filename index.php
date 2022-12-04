@@ -1,7 +1,7 @@
 <?php 
 
-require_once 'config/config.php';
-require_once 'model/db.php';
+require_once 'config/config.config.php';
+require_once 'config/db.config.php';
 
 if(!isset($_GET["controller"])) $_GET["controller"] = constant("DEFAULT_CONTROLLER");
 if(!isset($_GET["action"])) $_GET["action"] = constant("DEFAULT_ACTION");
@@ -9,7 +9,7 @@ if(!isset($_GET["action"])) $_GET["action"] = constant("DEFAULT_ACTION");
 $controller_path = 'controller/'.$_GET["controller"].'.php';
 
 /* Check if controller exists */
-if(!file_exists($controller_path)) $controller_path = 'controller/'.constant("DEFAULT_CONTROLLER").'.php';
+if(!file_exists($controller_path)) $controller_path = 'controller/'.constant("DEFAULT_CONTROLLER").'.controller.php';
 
 /* Load controller */
 require_once $controller_path;

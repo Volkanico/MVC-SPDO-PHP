@@ -1,5 +1,5 @@
 <?php 
-require_once 'model/camiseta.php';
+require_once ('./autoloadModel.php');
 
 class camisetaController{
 	public $page_title;
